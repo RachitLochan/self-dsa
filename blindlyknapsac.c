@@ -1,4 +1,6 @@
 #include<stdio.h>
+//not gonna lie super proud did 0 syntax erroe (ofc did 5 erooe of ; but did run this code on my mind )
+//and this kinda works man super proud 
 int main(){int num,sac;
     printf("enter number or elemets");
     scanf("%d",&num);
