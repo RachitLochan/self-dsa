@@ -1,0 +1,40 @@
+#include<stdio.h>
+int mmdp(int arr[],int size){
+    int i,j,q,min;// these are row coloum temp and final value 
+    int m[size][size];//just make the dp matrix dude to store solution
+    int s[size][size];//making the solution to store wrere to partition(as bigger the number more number of partion eg 3 number will have just 1 partion but 4 number will have 1.3 or 3.1 and these 3 have already been calulated in lower digonals thusthis matrix is needed for aprentesis making) 
+    for ( i = 0; i <size; i++)
+    {
+        m[i][i]=0;//all diogonal zero
+        m[i][0]=0;//alll 0 row zero
+        m[0][i]=0;//aal 0 coloum zero
+    }
+    //we start filling dioganl wise formula old subproblem + axbxc
+    for (int d = 1; d < size-1; d++)// d from 1 as 0 is 0 bro 3 digonals for 4 elemat as m{0,0] digonal is 0 known
+    {
+        for ( i = 1; i <size-d ; i++)//i is keep decresing as we go up 3,2,1 size-d for a digonal gives exact value for number of elemts in that digonal of i row bro
+        {
+            j=i+d;//ofcly as d is i minus j for any digonal we did earlier
+            min=999999;//ofcly near infity we taek ofcly(this will take 100% brain to undersatnd ecellent use of a language and local variable)
+            for (int k =i ; k < j; k++) //bruh k is all posiible soltuion of partion on j coloum dude eg k is 3 so (12)3 or 1(23) ways we try and keep the lowest 
+            {
+               q = m[i][k] + m[k+1][j] + arr[i-1] * arr[k] * arr[j]; // q is cost dude old subproblem(found in pervious diognal) + axbxc 
+                if (q<min)
+                {
+                    min=q;
+                    s[i][j]=k;//fill the parentisis matrix dude man
+                }
+               m[i][j]=min; 
+            }
+            
+        }
+        
+    }return m[1][size-1];
+    
+}
+int main(){
+    int n=5;
+    
+    int matrix[]={7, 10, 5, 12, 8};
+   printf("the lowest multipication is %d",mmdp(matrix,n));
+}
