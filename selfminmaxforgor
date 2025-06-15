@@ -1,0 +1,59 @@
+#include<stdio.h>
+void minmax(int arr[],int *min,int *max,int start,int end){ // yes need to take 5 argments lol for poition of array low high
+    int min1,min2,max1,max2; // see we dont put here r* or & now i undestand 
+    int mid=(start+end)/2;//(mid is accuate ly done in this genral code daym)
+    if (start==end)
+    {
+        *max=*min=arr[start];//ofc dono for sure directly in min max we put here
+        return;
+    }
+    if (start==end-1)//make sences as is arry[1] is has only 2 elemts 0 and 1(end elemnt index) so 0=1-1
+    {
+        if (arr[start]>arr[end])
+        {
+            *max=arr[start];
+            *min=arr[end];
+            return;
+        }
+        else
+        {
+            *max=arr[end];
+            *min=arr[start];
+            return;
+        }   
+    }
+    else
+    {
+        
+        minmax(arr,&max1,&min1,start,mid);
+        minmax(arr,&max2,&min2,mid+1,end);
+        if (max1>max2)
+        {
+            *max=max1;
+        }
+        else if(max1>max2)
+        {
+            *max=max2;
+        }
+        if (min1>min2)
+        {
+            *min=min1;
+        }
+        else if (min1<min2) //didint knew else if working now i know lol must learn more thoiuf
+        {
+            *min=min2;
+        }
+        return;
+    }
+    
+    
+}
+
+int main(){
+    int max=0,min=0;//we dont put &or* in declation here same in above min1,min2 one too 
+int arr[]={1,9,6,3,2,0,8,7,5,4};
+int size = sizeof(arr) / sizeof(arr[0]); //for some reason int size =10 ;arr[size]={1,2} not work
+minmax(arr,&min,&max,0,size-1);// we take the &adress as it has multiple valuse that change and need we adress to acall
+printf("the max is %d and min is %d",max,min);
+
+}
